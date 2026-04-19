@@ -1,5 +1,9 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./login";
+import { Link } from "react-router-dom";
+import Signup from "./signup";
 
 /* ─────────────────────────────────────────────
    DATA
@@ -76,6 +80,7 @@ function Nav() {
         <li><a href="#countdown">Launch</a></li>
         <li><a href="#crew">Crew</a></li>
         <li><a href="#log">Mission Log</a></li>
+        <li><Link to="/login">Login</Link></li>
       </ul>
       <div className="nav-status">
         <div className="status-dot" />
@@ -340,16 +345,46 @@ export default function App() {
   }, []);
 
   return (
-    <div className="space-page">
-      <StarField />
+    <BrowserRouter>
+
+      {/* ✅ NAV ALWAYS VISIBLE */}
       <Nav />
-      <Hero />
-      <Countdown />
-      <div className="divider" />
-      <Crew />
-      <div className="divider" />
-      <MissionLog />
-      <Footer />
+
+      <Routes>
+
+        {/* 🌌 HOME PAGE */}
+        <Route path="/" element={
+          <div className="space-page">
+            <StarField />
+            <Hero />
+            <Countdown />
+            <div className="divider" />
+            <Crew />
+            <div className="divider" />
+            <MissionLog />
+            <Footer />
+          </div>
+        } />
+
+        {/* 🔐 LOGIN */}
+        <Route path="/login" element={
+  <div className="space-page">
+
+    <StarField />
+
+    {/* SAME BACKGROUND AS HERO */}
+    <div className="hero-bg" />
+    <div className="hero-grid" />
+    <div className="earth-orb" />
+
+    <div className="auth-wrapper">
+      <Login />
     </div>
+
+  </div>
+} />
+
+      </Routes>
+    </BrowserRouter>
   );
 }
