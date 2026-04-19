@@ -73,17 +73,19 @@ function Nav() {
     <nav className="nav">
       <div className="nav-logo">
         <div className="meatball">NASA</div>
-        <span className="mission-id">NEBULA&thinsp;CORE</span>
+        <span className="mission-id">NEBULA CORE</span>
       </div>
+
       <ul className="nav-links">
-        <li><a href="#hero">Overview</a></li>
-        <li><a href="#countdown">Launch</a></li>
-        <li><a href="#crew">Crew</a></li>
-        <li><a href="#log">Mission Log</a></li>
+        <li><a href="/#hero">Overview</a></li>
+        <li><a href="/#countdown">Launch</a></li>
+        <li><a href="/#crew">Crew</a></li>
+        <li><a href="/#log">Mission Log</a></li>
         <li><Link to="/login">Login</Link></li>
       </ul>
+
       <div className="nav-status">
-        <div className="status-dot" />
+        <div className="status-dot"></div>
         MISSION NOMINAL
       </div>
     </nav>
