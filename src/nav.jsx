@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Nav() {
   return (
     <nav className="nav">
@@ -7,15 +9,16 @@ export default function Nav() {
       </div>
 
       <ul className="nav-links">
-        <li><a href="/">Overview</a></li>
-        <li><a href="/#launch">Launch</a></li>
-        <li><a href="/#crew">Crew</a></li>
-        <li><a href="/#mission-log">Mission Log</a></li>
-        <li><a href="/login">Login</a></li>
+        <li><Link to="/">Overview</Link></li>
+        <li><Link to="/launch">Launch</Link></li>
+        <li><Link to="/crew">Crew</Link></li>
+        <li><Link to="/missionlog">Mission Log</Link></li>
+        <li><Link to="/login">Login</Link></li>
+        <li><Link to="/signup">Signup</Link></li>
       </ul>
 
       <div className="nav-status">
-        <div className="status-dot" />
+        <div className="status-dot"></div>
         MISSION NOMINAL
       </div>
     </nav>

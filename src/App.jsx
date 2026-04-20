@@ -82,6 +82,7 @@ function Nav() {
         <li><a href="/#crew">Crew</a></li>
         <li><a href="/#log">Mission Log</a></li>
         <li><Link to="/login">Login</Link></li>
+        <li><Link to="/signup">Signup</Link></li>
       </ul>
 
       <div className="nav-status">
@@ -339,54 +340,66 @@ function Footer() {
    APP
 ───────────────────────────────────────────── */
 export default function App() {
-  useEffect(() => {
-    const style = document.createElement("style");
-    style.textContent = CSS;
-    document.head.appendChild(style);
-    return () => document.head.removeChild(style);
-  }, []);
-
   return (
     <BrowserRouter>
 
-      {/* ✅ NAV ALWAYS VISIBLE */}
       <Nav />
 
       <Routes>
 
-        {/* 🌌 HOME PAGE */}
-        <Route path="/" element={
-          <div className="space-page">
-            <StarField />
-            <Hero />
-            <Countdown />
-            <div className="divider" />
-            <Crew />
-            <div className="divider" />
-            <MissionLog />
-            <Footer />
-          </div>
-        } />
+        {/* HOME */}
+        <Route
+          path="/"
+          element={
+            <div className="space-page">
+              <StarField />
+              <Hero />
+              <Countdown />
+              <div className="divider" />
+              <Crew />
+              <div className="divider" />
+              <MissionLog />
+              <Footer />
+            </div>
+          }
+        />
 
-        {/* 🔐 LOGIN */}
-        <Route path="/login" element={
-  <div className="space-page">
+        {/* LOGIN */}
+        <Route
+          path="/login"
+          element={
+            <div className="space-page">
+              <StarField />
+              <div className="hero-bg" />
+              <div className="hero-grid" />
+              <div className="earth-orb" />
 
-    <StarField />
+              <div className="auth-wrapper">
+                <Login />
+              </div>
+            </div>
+          }
+        />
 
-    {/* SAME BACKGROUND AS HERO */}
-    <div className="hero-bg" />
-    <div className="hero-grid" />
-    <div className="earth-orb" />
+        {/* SIGNUP */}
+        <Route
+          path="/signup"
+          element={
+            <div className="space-page">
+              <StarField />
+              <div className="hero-bg" />
+              <div className="hero-grid" />
+              <div className="earth-orb" />
 
-    <div className="auth-wrapper">
-      <Login />
-    </div>
-
-  </div>
-} />
+              <div className="auth-wrapper">
+                <Signup />
+              </div>
+            </div>
+          }
+        />
 
       </Routes>
+
     </BrowserRouter>
   );
 }
