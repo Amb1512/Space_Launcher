@@ -1,5 +1,9 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./login";
+import { Link } from "react-router-dom";
+import Signup from "./signup";
 
 /* ─────────────────────────────────────────────
    DATA
@@ -69,16 +73,20 @@ function Nav() {
     <nav className="nav">
       <div className="nav-logo">
         <div className="meatball">NASA</div>
-        <span className="mission-id">NEBULA&thinsp;CORE</span>
+        <span className="mission-id">NEBULA CORE</span>
       </div>
+
       <ul className="nav-links">
-        <li><a href="#hero">Overview</a></li>
-        <li><a href="#countdown">Launch</a></li>
-        <li><a href="#crew">Crew</a></li>
-        <li><a href="#log">Mission Log</a></li>
+        <li><a href="/#hero">Overview</a></li>
+        <li><a href="/#countdown">Launch</a></li>
+        <li><a href="/#crew">Crew</a></li>
+        <li><a href="/#log">Mission Log</a></li>
+        <li><Link to="/login">Login</Link></li>
+        <li><Link to="/signup">Signup</Link></li>
       </ul>
+
       <div className="nav-status">
-        <div className="status-dot" />
+        <div className="status-dot"></div>
         MISSION NOMINAL
       </div>
     </nav>
@@ -332,24 +340,66 @@ function Footer() {
    APP
 ───────────────────────────────────────────── */
 export default function App() {
-  useEffect(() => {
-    const style = document.createElement("style");
-    style.textContent = CSS;
-    document.head.appendChild(style);
-    return () => document.head.removeChild(style);
-  }, []);
-
   return (
-    <div className="space-page">
-      <StarField />
+    <BrowserRouter>
+
       <Nav />
-      <Hero />
-      <Countdown />
-      <div className="divider" />
-      <Crew />
-      <div className="divider" />
-      <MissionLog />
-      <Footer />
-    </div>
+
+      <Routes>
+
+        {/* HOME */}
+        <Route
+          path="/"
+          element={
+            <div className="space-page">
+              <StarField />
+              <Hero />
+              <Countdown />
+              <div className="divider" />
+              <Crew />
+              <div className="divider" />
+              <MissionLog />
+              <Footer />
+            </div>
+          }
+        />
+
+        {/* LOGIN */}
+        <Route
+          path="/login"
+          element={
+            <div className="space-page">
+              <StarField />
+              <div className="hero-bg" />
+              <div className="hero-grid" />
+              <div className="earth-orb" />
+
+              <div className="auth-wrapper">
+                <Login />
+              </div>
+            </div>
+          }
+        />
+
+        {/* SIGNUP */}
+        <Route
+          path="/signup"
+          element={
+            <div className="space-page">
+              <StarField />
+              <div className="hero-bg" />
+              <div className="hero-grid" />
+              <div className="earth-orb" />
+
+              <div className="auth-wrapper">
+                <Signup />
+              </div>
+            </div>
+          }
+        />
+
+      </Routes>
+
+    </BrowserRouter>
   );
 }

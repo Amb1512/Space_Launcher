@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign Up - Space Mission</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background-color: black;
+            color: white;
+        }
+
+        header {
+            background-color: #07072c;
+            padding: 20px;
+            font-size: 32px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 350px;
+            margin: 80px auto;
+            padding: 30px;
+            background: #111;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #00ffff;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            background: #ddd;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #00d9d9;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #00b3b3;
+        }
+
+        .note {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<header>
+    🚀 Space Mission Management System
+</header>
+
+<div class="container">
+    <h2>Sign Up</h2>
+
+    <form id="signupForm">
+        <input type="text" placeholder="Astronaut Name" id="name" required>
+        <input type="email" placeholder="Email" id="email" required>
+        <input type="text" placeholder="Astronaut ID" id="id" required>
+        <input type="password" placeholder="Password" id="password" required>
+        <input type="password" placeholder="Confirm Password" id="confirmPassword" required>
+
+        <button type="submit">Create Account 🚀</button>
+
+        <p class="note">Authorized Personnel Only</p>
+    </form>
+</div>
+
+<script>
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+            alert("❌ Passwords do not match!");
+            return;
+        }
+
+        alert("✅ Account Created Successfully!");
+    });
+</script>
+
+</body>
+</html>

@@ -1,100 +1,490 @@
-#root {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0rem;
-  text-align: center;
+/* =====================================
+   GLOBAL RESET
+===================================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+html,
+body,
+#root{
+  width:100%;
+  min-height:100%;
+  font-family:"Segoe UI",sans-serif;
+  background:#020611;
+  color:#fff;
+  overflow-x:hidden;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+body{
+  position:relative;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button{
+  cursor:pointer;
+  font-family:inherit;
+}
+
+/* =====================================
+   STAR BACKGROUND (RED STARS)
+===================================== */
+.starfield{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.95) 1px, transparent 1px),
+    radial-gradient(circle at 70% 40%, rgba(255,255,255,.75) 1px, transparent 1px),
+    radial-gradient(circle at 40% 70%, rgba(255,255,255,.65) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size:
+    180px 180px,
+    220px 220px,
+    260px 260px,
+    72px 72px,
+    72px 72px;
+}
+
+/* =====================================
+   NAVBAR
+===================================== */
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:72px;
+  padding:0 30px;
+  background:rgba(0,0,0,.72);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.nav-logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.meatball{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#0b51b5;
+  border:2px solid rgba(255,255,255,.22);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  font-weight:700;
+}
+
+.mission-id{
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+.nav-links{
+  list-style:none;
+  display:flex;
+  gap:28px;
+}
+
+.nav-links li a{
+  font-size:12px;
+  letter-spacing:2px;
+  transition:.25s;
+}
+
+.nav-links li a:hover{
+  color:#59bfff;
+}
+
+.nav-status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#2effa5;
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+.status-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#2effa5;
+  box-shadow:0 0 10px #2effa5;
+}
+
+/* =====================================
+   GENERAL PAGE
+===================================== */
+.space-page{
+  position:relative;
+  z-index:1;
+  padding-top:72px;
+  min-height:100vh;
+}
+
+/* =====================================
+   HERO SECTION
+===================================== */
+.hero{
+  min-height:100vh;
+  padding:50px 20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.hero-content{
+  max-width:920px;
+}
+
+.hero-tag{
+  display:inline-block;
+  padding:8px 20px;
+  border:1px solid rgba(78,179,232,.35);
+  color:#59bfff;
+  font-size:12px;
+  letter-spacing:3px;
+  margin-bottom:24px;
+}
+
+.hero-sub{
+  font-size:14px;
+  color:#c7d0de;
+  letter-spacing:2px;
+  margin-bottom:18px;
+}
+
+.hero-h1{
+  font-size:88px;
+  line-height:.95;
+  font-weight:800;
+}
+
+.hero-h1 span{
+  color:#4eb3e8;
+}
+
+.hero-desc{
+  max-width:760px;
+  margin:24px auto;
+  font-size:17px;
+  line-height:1.8;
+  color:#dbe7ff;
+}
+
+.hero-stats{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+
+.stat{
+  min-width:200px;
+  padding:18px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(78,179,232,.12);
+}
+
+.stat-lbl{
+  font-size:11px;
+  letter-spacing:2px;
+  color:#7da9cf;
+}
+
+.stat-val{
+  margin-top:8px;
+  font-size:24px;
+  font-weight:700;
+}
+
+/* =====================================
+   BUTTONS
+===================================== */
+.btn-primary,
+.btn-ghost,
+.login-btn{
+  padding:14px 24px;
+  border:none;
+  background:#18479f;
+  color:#fff;
+  font-size:14px;
+  letter-spacing:2px;
+  transition:.25s;
+}
+
+.btn-primary:hover,
+.login-btn:hover{
+  background:#2260d1;
+}
+
+.btn-ghost{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.18);
+}
+
+/* =====================================
+   AUTH WRAPPER
+===================================== */
+.auth-wrapper{
+  min-height:calc(100vh - 72px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:30px 20px;
+  position:relative;
+  z-index:2;
+}
+
+/* =====================================
+   AUTH CARD
+===================================== */
+.auth-card{
+  width:100%;
+  max-width:540px;
+  padding:32px 36px;
+  background:rgba(7,18,42,.94);
+  border:1px solid rgba(78,179,232,.16);
+  border-top:4px solid #1677ff;
+  box-shadow:0 0 30px rgba(78,179,232,.08);
+  text-align:center;
+  position:relative;
+  z-index:3;
+}
+
+.auth-title{
+  font-size:42px;
+  line-height:1.05;
+  font-weight:800;
+  margin:12px 0;
+}
+
+.auth-sub{
+  font-size:15px;
+  color:#d5e0f0;
+  line-height:1.6;
+  max-width:460px;
+  margin:0 auto 22px;
+}
+
+/* =====================================
+   FORM
+===================================== */
+.login-form{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.login-form label{
+  text-align:left;
+  font-size:11px;
+  color: #ffffff;
+  margin-bottom: 8px;
+  display: block;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.login-form input,
+.login-form select{
+  width:100%;
+  padding:13px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(78,179,232,.18);
+  color:#fff;
+  font-size:13px;
+}
+
+.login-form input:focus,
+.login-form select:focus{
+  outline:none;
+  border-color:#59bfff;
+}
+
+/* required star red */
+.login-form label span,
+.login-form label .required,
+label span{
+  color:red;
+  font-weight:700;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.login-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:#dbe7ff;
+  font-size:13px;
+}
+
+.remember{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.login-row a{
+  color:#59bfff;
+}
+
+.login-btn{
+  margin-top:8px;
+  clip-path:polygon(0 0,96% 0,100% 20%,100% 100%,4% 100%,0 80%);
+}
+
+/* =====================================
+   TERMS ROW
+===================================== */
+.terms-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  white-space:nowrap;
+}
+
+.terms-row input{
+  width:15px;
+  height:15px;
+}
+
+.terms-row label{
+  font-size:13px;
+  letter-spacing:0;
+  text-transform:none;
+}
+
+/* =====================================
+   PROFILE IMAGE
+===================================== */
+.profile-preview{
+  width:95px;
+  height:95px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid rgba(78,179,232,.28);
+  margin:0 auto 10px;
+  display:block;
+  cursor:pointer;
+}
+
+/* =====================================
+   PLANET
+===================================== */
+.circle-bg,
+.moon,
+.planet{
+  position:fixed;
+  right:-180px;
+  bottom:-120px;
+  width:460px;
+  height:460px;
+  border-radius:50%;
+  background:rgba(38,100,210,.35);
+  z-index:1;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+footer{
+  padding:24px;
+  text-align:center;
+  color:#7da9cf;
+  border-top:1px solid rgba(255,255,255,.06);
+  font-size:13px;
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+@media(max-width:900px){
+
+  .hero-h1{
+    font-size:64px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .nav-links{
+    display:none;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media(max-width:768px){
+
+  .auth-card{
+    max-width:95%;
+    padding:24px;
   }
-}
 
-.card {
-  padding: 2em;
-}
+  .auth-title{
+    font-size:34px;
+  }
 
-.read-the-docs {
-  color: #888;
-}
+  .auth-sub{
+    font-size:14px;
+  }
 
-.launch-picker {
-  background: rgba(11, 61, 145, 0.15);
-  border: 1px solid rgba(78, 179, 232, 0.4);
-  color: #4eb3e8;
-  padding: 10px 14px;
-  border-radius: 6px;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 14px;
-  outline: none;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 10px rgba(78,179,232,0.3);
-  transition: all 0.2s ease;
-}
+  .form-row{
+    grid-template-columns:1fr;
+  }
 
-.launch-picker:hover {
-  box-shadow: 0 0 20px rgba(78,179,232,0.6);
-  border-color: #4eb3e8;
-}
+  .login-row{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
 
-.launch-picker:focus {
-  box-shadow: 0 0 25px rgba(78,179,232,0.9);
-  border-color: #4eb3e8;
-}
+  .hero-h1{
+    font-size:52px;
+  }
 
-.launch-picker::-webkit-calendar-picker-indicator {
-  filter: invert(1) brightness(2);
-  cursor: pointer;
-}
+  .hero-desc{
+    font-size:15px;
+  }
 
-.launch-picker {
-  background: rgba(11, 61, 145, 0.15);
-  border: 1px solid rgba(78, 179, 232, 0.4);
-  color: #4eb3e8;
-  padding: 10px 14px;
-  border-radius: 6px;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 14px;
-  outline: none;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 10px rgba(78,179,232,0.3);
-  transition: all 0.2s ease;
-}
+  .profile-preview{
+    width:80px;
+    height:80px;
+  }
 
-.launch-picker:hover {
-  box-shadow: 0 0 20px rgba(78,179,232,0.6);
-  border-color: #4eb3e8;
-}
+  .circle-bg,
+  .moon,
+  .planet{
+    width:300px;
+    height:300px;
+    right:-130px;
+    bottom:-90px;
+  }
 
-.launch-picker:focus {
-  box-shadow: 0 0 25px rgba(78,179,232,0.9);
-  border-color: #4eb3e8;
-}
-
-.launch-picker::-webkit-calendar-picker-indicator {
-  filter: invert(1) brightness(2);
-  cursor: pointer;
+  .terms-row{
+    white-space:normal;
+    text-align:center;
+  }
 }

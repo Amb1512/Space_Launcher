@@ -19,7 +19,6 @@ body{
     background:#020b18;
     color:white;
     overflow:hidden;
-    position:relative;
 }
 
 /* GRID */
@@ -35,48 +34,37 @@ body::before{
     z-index:0;
 }
 
-/* 🌟 STARS LAYER */
-.stars{
-    position:fixed;
+/* STARS */
+body::after{
+    content:"";
+    position:absolute;
     top:0;
     left:0;
     width:100%;
     height:100%;
-    z-index:0;
-    pointer-events:none;
-}
 
-.stars::after{
-    content:"";
-    position:absolute;
-    width:2px;
-    height:2px;
-    background:white;
+    background:
+        radial-gradient(2px 2px at 10% 20%, white, transparent),
+        radial-gradient(1.5px 1.5px at 30% 70%, #cfe9ff, transparent),
+        radial-gradient(2px 2px at 50% 40%, white, transparent),
+        radial-gradient(1px 1px at 70% 90%, #a6d4ff, transparent),
+        radial-gradient(2px 2px at 90% 10%, white, transparent),
+        radial-gradient(1px 1px at 80% 50%, #9ecfff, transparent),
+        radial-gradient(2px 2px at 25% 85%, white, transparent);
 
-    box-shadow:
-    50px 80px white,
-    120px 200px white,
-    300px 150px white,
-    500px 50px white,
-    700px 250px white,
-    900px 100px white,
-    1100px 300px white,
-    200px 350px white,
-    400px 450px white,
-    600px 400px white,
-    800px 500px white,
-    100px 600px white,
-    350px 700px white,
-    750px 650px white,
-    950px 550px white;
+    background-repeat: repeat;
+    background-size: 600px 600px;
 
-    animation: twinkle 3s infinite alternate;
+    animation: twinkle 4s infinite alternate;
+
+    opacity:0.8;
+    z-index:1;
 }
 
 /* TWINKLE */
-@keyframes twinkle{
-    0%{opacity:0.4;}
-    100%{opacity:1;}
+@keyframes twinkle {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
 }
 
 /* NAVBAR */
@@ -288,9 +276,6 @@ button:hover{
 </head>
 
 <body>
-
-<!-- ⭐ STARS -->
-<div class="stars"></div>
 
 <div class="navbar">
     <div class="logo">
