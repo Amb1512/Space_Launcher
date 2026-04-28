@@ -61,25 +61,15 @@ export default function Signup() {
 
     const data = await res.json();
 
-    alert(data.message);
-
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      agency: "",
-      rank: "",
-      termsAccepted: false,
-      profilePic: null
-    });
-
-    setPreview(null);
+    if (res.ok) {
+      alert("Signup Successful 🚀");
+    } else {
+      alert(data.message);
+    }
 
   } catch (error) {
-    alert("Signup Failed");
     console.log(error);
+    alert("Server Error");
   }
 };
 
