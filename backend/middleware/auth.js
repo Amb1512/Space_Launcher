@@ -1,10 +1,28 @@
-const auth = (req, res, next) => {
-  const token = req.headers.authorization;
+const jwt = require("jsonwebtoken");
 
-  if (token === "mission123") {
+const auth = (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).json({
+        message: "No token provided"
+      });
+    }
+
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET
+    );
+
+    req.user = decoded;
+
     next();
-  } else {
-    res.status(401).json({ message: "Unauthorized Access" });
+
+  } catch (error) {
+    res.status(401).json({
+      message: "Invalid Token"
+    });
   }
 };
 

@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./login";
 import { Link } from "react-router-dom";
 import Signup from "./signup";
+import CrewPage from "./Crew";
 
 /* ─────────────────────────────────────────────
    DATA
@@ -83,6 +84,7 @@ function Nav() {
         <li><a href="/#log">Mission Log</a></li>
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/signup">Signup</Link></li>
+        <li><Link to="/crewpage">Live Crew</Link></li>
       </ul>
 
       <div className="nav-status">
@@ -263,7 +265,7 @@ function CrewCard({ member }) {
   );
 }
 
-function Crew() {
+function CrewSection() {
   return (
     <section className="crew-section" id="crew">
       <div className="section-header">
@@ -356,7 +358,7 @@ export default function App() {
               <Hero />
               <Countdown />
               <div className="divider" />
-              <Crew />
+              <CrewSection />
               <div className="divider" />
               <MissionLog />
               <Footer />
@@ -397,6 +399,16 @@ export default function App() {
             </div>
           }
         />
+
+        <Route
+  path="/crewpage"
+  element={
+    <div className="space-page">
+      <StarField />
+      <CrewPage />
+    </div>
+  }
+/>
 
       </Routes>
 

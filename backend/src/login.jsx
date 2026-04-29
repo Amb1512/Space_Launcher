@@ -5,10 +5,36 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log(email, password);
-  };
+ const handleLogin = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await fetch("http://localhost:5000/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email,
+        password
+      })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem("token", data.token);
+      alert("Login Successful 🚀");
+      console.log(data);
+    } else {
+      alert(data.message);
+    }
+
+  } catch (error) {
+    console.log(error);
+    alert("Server Error");
+  }
+};
 
   return (
     <div className="auth-card">
