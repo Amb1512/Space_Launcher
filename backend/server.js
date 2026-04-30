@@ -8,6 +8,8 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import connectDB from "./database/db.js";
 import crewRoutes from "./routes/crewRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import User from "./models/user.js";
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 
@@ -35,19 +37,33 @@ passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET || "dummy",
   callbackURL: "/auth/google/callback"
-}, (accessToken, refreshToken, profile, done) => {
-  // Here you would find or create the user in your DB
-  return done(null, profile);
+}, async (accessToken, refreshToken, profile, done) => {
+  try {
+    const email = profile.emails && profile.emails[0] && profile.emails[0].value;
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = await User.create({
+        name: profile.displayName,
+        email,
+        password: ""
+      });
+    }
+    return done(null, user);
+  } catch (err) {
+    return done(err, null);
+  }
 }));
 
 // Google OAuth routes
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 app.get("/auth/google/callback", passport.authenticate("google", {
   failureRedirect: "/login",
-  session: true
+  session: false
 }), (req, res) => {
   // Successful authentication
-  res.json({ message: "Google OAuth login successful", user: req.user });
+  const user = req.user;
+  const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "1h" });
+  res.json({ message: "Google OAuth login successful", token });
 });
 // Health check endpoint for MongoDB (must be after app is defined)
 app.get("/health", (req, res) => {
