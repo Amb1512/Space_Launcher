@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import "./App.css";
 
@@ -5,9 +6,25 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(email, password);
+    try {
+      const res = await fetch("http://localhost:5000/user/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (res.ok && data.token) {
+        localStorage.setItem("token", data.token);
+        alert("Login successful!");
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (err) {
+      alert("Login error");
+    }
   };
 
   return (
@@ -50,8 +67,20 @@ export default function Login() {
           <a href="#">Forgot password?</a>
         </div>
 
+
         <button type="submit" className="login-btn">
           ACCESS MISSION CONTROL
+        </button>
+
+        <button
+          type="button"
+          className="login-btn google-btn"
+          style={{ marginTop: 12, background: "#fff", color: "#222", border: "1px solid #ccc" }}
+          onClick={() => {
+            window.location.href = "http://localhost:5000/auth/google";
+          }}
+        >
+          Sign in with Google
         </button>
 
       </form>
