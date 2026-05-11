@@ -35,10 +35,37 @@ export default function Signup() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    alert("Signup Successful 🚀");
+
+    const form = new FormData();
+    form.append("firstName", formData.firstName);
+    form.append("lastName", formData.lastName);
+    form.append("name", formData.firstName + " " + formData.lastName);
+    form.append("email", formData.email);
+    form.append("password", formData.password);
+    form.append("agency", formData.agency);
+    form.append("rank", formData.rank);
+    form.append("termsAccepted", formData.termsAccepted);
+    if (formData.profilePic) {
+      form.append("profilePic", formData.profilePic);
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/signup", {
+        method: "POST",
+        body: form,
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert("Signup Successful 🚀");
+      } else {
+        alert(data.message || "Signup failed");
+      }
+    } catch (error) {
+      alert("Error connecting to server");
+    }
   };
 
   return (
