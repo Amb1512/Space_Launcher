@@ -1,4 +1,4 @@
-const Crew = require("../models/Crew");
+const Crew = require("../../models/Crew");
 
 const getCrew = async (req, res) => {
   try {

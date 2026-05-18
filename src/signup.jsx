@@ -38,23 +38,24 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const form = new FormData();
-    form.append("firstName", formData.firstName);
-    form.append("lastName", formData.lastName);
-    form.append("name", formData.firstName + " " + formData.lastName);
-    form.append("email", formData.email);
-    form.append("password", formData.password);
-    form.append("agency", formData.agency);
-    form.append("rank", formData.rank);
-    form.append("termsAccepted", formData.termsAccepted);
-    if (formData.profilePic) {
-      form.append("profilePic", formData.profilePic);
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
     }
 
     try {
-      const response = await fetch("http://localhost:5000/signup", {
+      const response = await fetch("http://localhost:5000/user/signup", {
         method: "POST",
-        body: form,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
+          email: formData.email,
+          password: formData.password,
+          agency: formData.agency,
+          rank: formData.rank,
+        }),
       });
 
       const data = await response.json();
@@ -64,6 +65,7 @@ export default function Signup() {
         alert(data.message || "Signup failed");
       }
     } catch (error) {
+      console.error("Signup error:", error);
       alert("Error connecting to server");
     }
   };
